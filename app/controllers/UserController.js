@@ -1,13 +1,16 @@
+const knex = require('knex');
+const config = require('../../knexfile').development;
+const db = knex(config);
 class UserController {
 
-    index(req, res) {
-        res.status(200).send({
-            message: "Controle criado com sucesso"
-        });
+    async index(req, res) {
+        await db.select().table("users");
     }
-    store(req, res) { }
-    show(req, res) { }
-    update(req, res) { }
-    destroy(req, res) { }
+    async store(req, res) {
+        await db("users").insert({ name: "" });
+    }
+    async show(req, res) { }
+    async update(req, res) { }
+    async destroy(req, res) { }
 }
 module.exports = new UserController();
